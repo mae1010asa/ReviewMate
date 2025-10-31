@@ -1,24 +1,32 @@
-# README
+# ReviewMate
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+レビューを通じてつながるSNS
 
-Things you may want to cover:
+​
+### テーマを選んだ理由
+レビューサイトは世の中に数多く存在しますが、レビューする人同士が交流するという機会はあまりありません。そのため、価値観が同じである人のレビューを判別しづらく、目につきやすい過度な賛美や批判を真に受けやすい側面があると思います。そのため、レビューする人に対してより注目を向け、価値観の合う人を見つけられるSNS形式のレビューサイトがあれば面白く、役に立つのではないかと考えました。
 
-* Ruby version
+​
+### ターゲットユーザ
+レビューを通じて他の購入者と交流したい人
+SNSの雑多な情報よりも、共感ベースの意見交換を求める人
+自分のレビューを発信して影響を与えたいレビュアー志向の人
+​
+### 主な利用シーン
+- 商品購入後、感想を共有し、他の人の意見も聞きたい時
+- 商品購入前、気になる商品に対して信頼できるレビューが知りたい時
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 設計書
+後ほど作成予定
+​
+## 開発環境
+- OS：Windows
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Visual Studio Code（VSCode）
+​
+## 使用素材
+商品に関しては著作権を考慮し、架空のデータを扱う予定です。

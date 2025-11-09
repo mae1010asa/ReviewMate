@@ -1,2 +1,4 @@
-<h1>Public::Reviews#show</h1>
-<p>Find me in app/views/public/reviews/show.html.erb</p>
+<% if @review.user == current_user %>
+<%= link_to "Edit", edit_item_review_path(@item, @review), class: "btn btn-success" %>
+<%= link_to "Destroy", item_review_path(@item, @review), method: :delete, class: "btn btn-danger", data: {confirm:"Are you sure?"} %>
+<% end %>

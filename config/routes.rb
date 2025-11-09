@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   scope module: :public do
 
     resources :items, only: [:index, :show] do
-      resources :reviews, only: [:new, :create, :destroy]
+      resources :reviews, only: [:new, :create, :show, :edit, :update, :destroy]
     end
     
   end

@@ -1,2 +1,35 @@
-<h1>Public::Reviews#edit</h1>
-<p>Find me in app/views/public/reviews/edit.html.erb</p>
+<div class='container py-5'>
+  <div class='row'>
+      <div class='col-md-12'>
+        <div class='row'>
+          <div class="description-scroll col-6 px-3">  
+            <h1><%= @item.title %></h2>
+            <p class="description-scroll p-3">
+              <%= @item.body %>
+            </p>
+          </div>
+        </div>
+        <div class="comment-form px-3">
+          <h4>レビュー内容を変更する</h4>
+            <%= form_with(model: [@item, @review], local: false) do |f| %>
+              <div class="form-group">
+                <%= f.label :タイトル %>
+                <%= f.text_field :title, class: 'form-control review_title' %>
+              </div>
+              <div class="form-group">
+                <%= f.label :内容 %>
+                <%= f.text_area :body, class: 'form-control review_body' %>
+              </div>
+              <div class="form-group">
+                <%= f.label :星評価（仮） %>
+                <%= f.text_area :star, class: 'form-control review_star' %>
+              </div>
+              <div class="form-group">
+                <%= f.submit '送信' %>
+              </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

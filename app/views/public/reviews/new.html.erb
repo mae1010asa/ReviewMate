@@ -21,6 +21,10 @@
                 <%= f.text_area :body, class: 'form-control review_body' %>
               </div>
               <div class="form-group">
+                <%= f.label :星評価（仮） %>
+                <%= f.text_area :star, class: 'form-control review_star' %>
+              </div>
+              <div class="form-group">
                 <%= f.submit '送信' %>
               </div>
             <% end %>

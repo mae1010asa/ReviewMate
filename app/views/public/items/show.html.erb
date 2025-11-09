@@ -22,10 +22,10 @@
           <% @item.reviews.each do |review| %>
             <tr>
               <td>
-                <%= review.user.name %>
+                <%= link_to review.title, item_review_path(@item, review) %>
               </td>
               <td>
-                <%= review.title %>
+                投稿者：<%= review.user.name %>
               </td>
               <td>
                 <%= review.body %>

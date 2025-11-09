@@ -3,5 +3,19 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#   movies = Movie.create([{ title: 'Star Wars' }, { title: 'Lord of the Rings' }])
+#   Character.create(title: 'Luke', movie: movies.first)
+Item.create!(
+  [
+   {title: "緑茶", body: "" },
+   {title: "オレンジジュース", body: "" },
+   {title: "チーズタルト", body: "" },
+   {title: "モンブラン", body: "" },
+  {title: "冷蔵庫(2025モデル)1234-56789", body: "" },
+  {title: "電子レンジABC-DEFG", body: "" },
+  {title: "ボディソープ", body: "" },
+  {title: "シャンプー", body: "" },
+  {title: "オフィスチェア", body: "" },
+  {title: "カラーボックス", body: "" },
+  ]
+)

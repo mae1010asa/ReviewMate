@@ -3,7 +3,7 @@ class CreateItems < ActiveRecord::Migration[6.1]
     create_table :items do |t|
 
       t.string :title, null: false
-      t.text :body, null: false
+      t.text :body
       t.timestamps
     end
   end

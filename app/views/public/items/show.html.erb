@@ -1,0 +1,38 @@
+<div class='container py-5'>
+  <div class='row'>
+      <div class='col-md-12'>
+        <div class='row'>
+          <div class="description-scroll col-6 px-3">  
+            <h1><%= @item.title %></h2>
+            <p class="description-scroll p-3">
+              【商品内容】<br>
+              <%= @item.body %>
+            </p>
+          </div>
+        </div>
+        <div class="p-3">
+          <h4>
+            <%= link_to "レビューを投稿する", new_item_review_path(@item) %>
+          </h4>
+        </div>
+        <div class="p-3">
+          <h4>【レビュー一覧】</h4>
+        </div>
+        <table class='my-5'>
+          <% @item.reviews.each do |review| %>
+            <tr>
+              <td>
+                <%= review.user.name %>
+              </td>
+              <td>
+                <%= review.title %>
+              </td>
+              <td>
+                <%= review.body %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>

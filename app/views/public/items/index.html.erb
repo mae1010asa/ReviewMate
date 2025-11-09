@@ -1,0 +1,19 @@
+<div class='container py-5'>
+  <div class='row'>
+      <div>
+        <div class="row">
+          <h4>商品一覧</h4>
+        </div>
+        <div class="row">
+          <% @items.each do |item| %>
+            <div class="col-md-6 p-2">
+              <td><%= link_to item_path(item.id) do %>
+                <%= item.title %></td>
+                <% end %>
+              </td><br>
+            </div>
+          <% end %>
+        </div>
+      </div>  
+  </div>
+</div>    

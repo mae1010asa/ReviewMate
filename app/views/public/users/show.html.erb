@@ -1,0 +1,20 @@
+<div class='container py-5'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <div class='row'>
+        <div class="description-scroll col-6 px-3">  
+          <h1><%= @user.name %></h2>
+          <p class="description-scroll p-3">
+            メールアドレス：<%= @user.email %>
+          </p>
+        </div>
+      </div>
+      <div class="p-3">
+        <% if @user == current_user %>
+        <%= link_to "編集する", edit_user_path, class: "btn btn-success" %>
+        <%= link_to "退会する", user_path, method: :delete, class: "btn btn-danger", data: {confirm:"Are you sure?"} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

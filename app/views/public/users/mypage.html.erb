@@ -1,11 +1,13 @@
+<div>
+  <%= link_to @user.name, user_path(@user) %>
+</div>
+
+<h4>投稿したレビュー</h4>
 <table class='my-5'>
   <% @user.reviews.each do |review| %>
     <tr>
       <td>
         <%= link_to review.title, item_review_path(@user, review) %>
-      </td>
-      <td>
-        投稿者：<%= review.user.name %>
       </td>
       <td>
         <%= review.body %>

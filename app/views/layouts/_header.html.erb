@@ -14,12 +14,17 @@
             <% end %>
           </li>
           <li>
-              <i class="fas fa-users"></i> Users
+            <%= link_to homes_about_path,class: 'nav-link text-light' do %>
+              <i class="fas fa-link"></i> About
+            <% end %>
           </li>
           <li>
             <%= link_to items_path,class: 'nav-link text-light' do %>
               <i class="fas fa-book-open"></i> 商品
             <% end %>
+          </li>
+          <li>
+              <i class="fas fa-users"></i> Users
           </li>
           <li>
             <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
@@ -35,6 +40,11 @@
           <li>
             <%= link_to homes_about_path,class: 'nav-link text-light' do %>
               <i class="fas fa-link"></i> About
+            <% end %>
+          </li>
+          <li>
+            <%= link_to items_path,class: 'nav-link text-light' do %>
+              <i class="fas fa-book-open"></i> 商品
             <% end %>
           </li>
           <li>

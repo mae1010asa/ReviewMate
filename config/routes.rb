@@ -32,8 +32,17 @@ Rails.application.routes.draw do
     get "about", to: "public/homes#about", as: "homes_about"
   scope module: :public do
 
+    get 'mypage', to: 'users#mypage', as: 'mypage'
+
     resources :items, only: [:index, :show] do
       resources :reviews, only: [:new, :create, :show, :edit, :update, :destroy]
+    end
+    resources :users, only: [:show,:edit,:update, :destroy] do
+      member do
+        get :followings
+        get :followers
+      end
+      resource :relationship, only: [:create, :destroy]
     end
     
   end

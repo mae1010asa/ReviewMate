@@ -9,5 +9,5 @@ class Public::ItemsController < ApplicationController
 end
 
 def item_params
-    params.require(:item).permit(:title, :body)
-  end
+  params.require(:item).permit(:title, :body)
+end

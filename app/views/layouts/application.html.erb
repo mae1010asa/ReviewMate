@@ -12,11 +12,8 @@
   <body>
     <%= render 'layouts/header' %>
       <main>
-        <p id="notice"><%= notice %></p>
-        <div class="d-flex justify-content-center mb-2">
-
-        </div>
+        <%= render 'layouts/flash_message' %>
+        <%= yield %>
       </main>
-    <%= yield %>
   </body>
 </html>

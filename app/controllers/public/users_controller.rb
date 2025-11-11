@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_not_guest_user, only: [:destroy]
+  before_action :ensure_not_guest_user, only: [:update, :destroy]
 
   def mypage
     @user = current_user
@@ -17,7 +17,7 @@ class Public::UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to user_path(@user), notice: "レビューを更新しました。"
+      redirect_to user_path(@user), notice: "ユーザー情報を更新しました。"
     else
       flash.now[:alert] = '更新に失敗しました。'
       render :edit
@@ -43,7 +43,7 @@ class Public::UsersController < ApplicationController
   def ensure_not_guest_user
     @user = User.find(params[:id])
     if @user.email == User::GUEST_USER_EMAIL
-      redirect_to user_path(@user), alert: 'ゲストユーザーは退会できません。'
+      redirect_to user_path(@user), alert: 'ゲストユーザーではこの処理ができません。'
     end
   end
 

@@ -3,7 +3,8 @@
     <div class='col-md-12'>
       <div class='row'>
         <div class="description-scroll col-6 px-3">  
-          <h1><%= @user.name %></h2>
+          <h2><%= @user.name %></h2>
+          <%= image_tag @user.get_user_image, size:'200x200' %>
           <p class="description-scroll p-3">
             メールアドレス：<%= @user.email %>
           </p>

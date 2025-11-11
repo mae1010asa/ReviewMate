@@ -3,9 +3,14 @@
     <div class='col-md-12'>
       <div class='row'>
         <div class="description-scroll col-6 px-3">  
-          <h1><%= @review.title %></h2>
+          <h3><strong><%= @review.title %></strong></h3>
           <p class="description-scroll p-3">
-            商品名：<%= @item.title %><br>
+            商品名：<%= link_to @item.title, item_path(@item) %><br>
+            投稿者：<%= link_to @review.user.name, user_path(@review) %><br>
+            投稿日時：<%= @review.created_at %><br>
+            最終更新日時：<%= @review.updated_at %>
+          </p>
+          <p class="description-scroll px-3">
             <%= @review.body %>
           </p>
         </div>
@@ -17,7 +22,7 @@
         <% end %>
       </div>
       <div class="p-3">
-        <h4>【コメント一覧】</h4>
+        <h4></h4>
       </div>
     </div>
   </div>

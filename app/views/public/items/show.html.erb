@@ -3,16 +3,16 @@
       <div class='col-md-12'>
         <div class='row'>
           <div class="description-scroll col-6 px-3">  
-            <h1><%= @item.title %></h2>
+            <h2><%= @item.title %></h2>
+            <%= image_tag @item.get_item_image, size:'200x130' %>
             <p class="description-scroll p-3">
-              【商品内容】<br>
               <%= @item.body %>
             </p>
           </div>
         </div>
         <div class="p-3">
           <h4>
-            <%= link_to "レビューを投稿する", new_item_review_path(@item) %>
+            <%= link_to "レビュー投稿画面へ", new_item_review_path(@item) %>
           </h4>
         </div>
         <div class="p-3">
@@ -20,17 +20,16 @@
         </div>
         <table class='my-5'>
           <% @item.reviews.each do |review| %>
-            <tr>
-              <td>
-                <%= link_to review.title, item_review_path(@item, review) %>
-              </td>
-              <td>
-                投稿者：<%= review.user.name %>
-              </td>
-              <td>
-                <%= review.body %>
-              </td>
-            </tr>
+            <div class="px-3">
+              <h5>
+                <%= link_to review.title, item_review_path(@item, review) %><br>
+                投稿者：<%= link_to review.user.name, user_path(@item, review) %>
+              </h5>
+              <div class="row px-3">
+                <%= image_tag review.user.get_user_image, size:'100x100' %>
+                <p class="px-3"><%= review.body %></p>
+              </div>
+            </div>
           <% end %>
         </table>
       </div>

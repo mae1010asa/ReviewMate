@@ -3,7 +3,8 @@
       <div class='col-md-12'>
         <div class='row'>
           <div class="description-scroll col-6 px-3">  
-            <h1><%= @item.title %></h2>
+            <h2><%= @item.title %></h2>
+            <%= image_tag @item.get_item_image, size:'200x130' %>
             <p class="description-scroll p-3">
               <%= @item.body %>
             </p>
@@ -28,6 +29,7 @@
                 <%= f.submit '送信' %>
               </div>
             <% end %>
+            <%= link_to "商品画面へ戻る", item_path(@item) %>
         </div>
       </div>
     </div>

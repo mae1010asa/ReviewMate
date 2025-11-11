@@ -1,17 +1,27 @@
-<div>
-  <%= link_to @user.name, user_path(@user) %>
-</div>
+<div class='container py-2'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <div class='row'>
+        ログイン中のユーザー：<%= link_to @user.name, user_path(@user) %>
+      </div>
+      <%= image_tag @user.get_user_image, size:'100x100' %>
 
-<h4>投稿したレビュー</h4>
-<table class='my-5'>
-  <% @user.reviews.each do |review| %>
-    <tr>
-      <td>
-        <%= link_to review.title, item_review_path(@user, review) %>
-      </td>
-      <td>
-        <%= review.body %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+      <h4 class='my-5'>投稿したレビュー</h4>
+      <table class='table table-hover my-5'>
+        <tbody>
+          <% @user.reviews.each do |review| %>
+            <td class="px-3">
+                <h5>
+                  <%= link_to review.title, item_review_path(@user, review) %><br>
+                  商品：<%= review.item.title %>
+                </h5>
+                <div class="row px-3">
+                  内容：<p><%= review.body %></p>
+                </div>
+            </td>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

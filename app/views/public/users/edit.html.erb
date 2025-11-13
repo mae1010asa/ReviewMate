@@ -3,7 +3,7 @@
       <div class='col-md-12'>
         <div class="comment-form px-3">
           <h4>登録情報を変更する</h4>
-            <%= form_with(model: [@user], local: false) do |f| %>
+            <%= form_with(model: [@user], local: true) do |f| %>
               <div class="form-group">
                 <%= f.label :名前 %>
                 <%= f.text_field :name, class: 'form-control user_name' %>
@@ -20,6 +20,11 @@
                 <%= f.submit '送信' %>
               </div>
             <% end %>
+            <div class="p-3">
+              <% if @user == current_user %>
+              <%= link_to "退会する", user_path, method: :delete, class: "btn btn-danger", data: {confirm:"Are you sure?"} %>
+              <% end %>
+            </div>
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ class Public::ItemsController < ApplicationController
       @items = Item.all
       @items = Item.includes(:reviews).all
       # 保存が失敗した場合、# newを再表示します
-      flash.now[:alert] = 'ページの作成に失敗しました。入力内容をご確認ください。'
+      flash[:alert] = 'ページの作成に失敗しました。入力内容をご確認ください。'
       render 'index'
     end
   end

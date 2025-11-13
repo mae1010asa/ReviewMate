@@ -11,7 +11,7 @@
         </div>
         <div class="comment-form px-3">
           <h4>レビュー内容を変更する</h4>
-            <%= form_with(model: [@item, @review], local: false) do |f| %>
+            <%= form_with(model: [@item, @review], local: true) do |f| %>
               <div class="form-group">
                 <%= f.label :タイトル %>
                 <%= f.text_field :title, class: 'form-control review_title' %>

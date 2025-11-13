@@ -15,7 +15,7 @@ class Public::ReviewsController < ApplicationController
       redirect_to item_path(@item), notice: 'レビューを投稿しました。'
     else
       # 保存が失敗した場合、# newを再表示します
-      flash.now[:alert] = '投稿に失敗しました。入力内容をご確認ください。'
+      flash[:alert] = '投稿に失敗しました。入力内容をご確認ください。'
       render :new, status: :unprocessable_entity
     end
   end
@@ -42,7 +42,7 @@ class Public::ReviewsController < ApplicationController
     if @review.update(review_params)
       redirect_to item_review_path(@item, @review), notice: "レビューを更新しました。"
     else
-      flash.now[:alert] = '更新に失敗しました。入力内容をご確認ください。'
+      flash[:alert] = '更新に失敗しました。入力内容をご確認ください。'
       render :edit
     end
   end
@@ -52,7 +52,7 @@ class Public::ReviewsController < ApplicationController
       @review.destroy
       redirect_to item_path(@item), notice: 'レビューを削除しました。'
     else
-      redirect_to item_path(@item), alert: '削除する権限がありません。'
+      redirect_to mypage_path(@review.user), alert: '削除する権限がありません。'
     end
   end
 

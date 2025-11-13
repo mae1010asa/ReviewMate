@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  private
+  protected
 
   def after_sign_in_path_for(resource)
     mypage_path(resource)
@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(resource)
-    root_path
+    homes_about_path
   end
 
   def configure_permitted_parameters

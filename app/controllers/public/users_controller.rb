@@ -19,7 +19,7 @@ class Public::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to user_path(@user), notice: "ユーザー情報を更新しました。"
     else
-      flash.now[:alert] = '更新に失敗しました。'
+      flash[:alert] = '更新に失敗しました。'
       render :edit
     end
   end
@@ -28,7 +28,7 @@ class Public::UsersController < ApplicationController
     if @user == current_user
       @user.destroy
       sign_out(current_user)
-      redirect_to root_path, notice: '退会しました。'
+      redirect_to new_user_registration_path, notice: '退会しました。'
     end
   end
 

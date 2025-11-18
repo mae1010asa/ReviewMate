@@ -8,7 +8,7 @@ class Public::UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
+    @user = User.find(params[:id])
   end
   def edit
     @user = current_user
@@ -31,6 +31,17 @@ class Public::UsersController < ApplicationController
       redirect_to new_user_registration_path, notice: '退会しました。'
     end
   end
+
+  def followings
+    user = User.find(params[:id])
+    @users = user.followings
+  end
+
+  def followers
+    user = User.find(params[:id])
+    @users = user.followers
+  end
+
 
 
   private

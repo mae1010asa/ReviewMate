@@ -4,7 +4,21 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :reviews, dependent: :destroy
-  validates :name,presence:true
+
+  # フォローしている側の関係
+  has_many :active_relationships, class_name: "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent: :destroy
+  has_many :followings, through: :active_relationships, source: :followed
+
+  # フォローされている側の関係
+  has_many :passive_relationships, class_name: "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :follower
+
+  
+  validates :name, length: { maximum: 20 }, presence:true
   validates :email,presence:true
 
   GUEST_USER_EMAIL = "guest@example.com"
@@ -24,4 +38,9 @@ class User < ApplicationRecord
       'no_image.jpg'
     end
   end
+
+  def following?(user)
+    followings.exists?(id: user.id)
+  end
+
 end

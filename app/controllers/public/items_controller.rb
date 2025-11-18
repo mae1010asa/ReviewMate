@@ -2,8 +2,17 @@ class Public::ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
 
   def index
-    @items = Item.all
     @items = Item.includes(:reviews).all
+    @q = Item.ransack(params[:q])
+
+    if params[:q].present?
+      # 検索がある場合
+      @items = @q.result(distinct: true).order(created_at: :desc)
+    else
+      # 検索がない場合（通常の一覧）
+      @items = Item.all.order(created_at: :desc)
+    end
+
   end
 
   def show

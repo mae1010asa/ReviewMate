@@ -4,6 +4,7 @@
       <div class='row'>
         <div class="description-scroll col-6 px-3">  
           <h3><strong><%= @review.title %></strong></h3>
+          <%= render "public/shared/star", review: @review %>
           <p class="description-scroll p-3">
             商品名：<%= link_to @item.title, item_path(@item) %><br>
             投稿者：<%= link_to @review.user.name, user_path(@review) %><br>

@@ -21,11 +21,17 @@
                 <%= f.label :内容 %>
                 <%= f.text_area :body, class: 'form-control review_body' %>
               </div>
-              <div class="form-group">
-                <%= f.label :星評価（仮） %>
-                <%= f.text_area :star, class: 'form-control review_star' %>
-              </div>
-              <div class="form-group">
+              <div id="post_raty"></div>
+                <script>
+                  let elem = document.querySelector('#post_raty');
+                  let opt = {  
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    scoreName: 'review[star]',
+                  };
+                  raty(elem,opt);
+                </script>
+              <div class="form-group pt-3">
                 <%= f.submit '送信' %>
               </div>
             <% end %>

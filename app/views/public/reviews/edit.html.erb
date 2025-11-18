@@ -11,6 +11,7 @@
         </div>
         <div class="comment-form px-3">
           <h4>レビュー内容を変更する</h4>
+          <%= render "public/shared/star", review: @review %>
             <%= form_with(model: [@item, @review], local: true) do |f| %>
               <div class="form-group">
                 <%= f.label :タイトル %>
@@ -19,10 +20,6 @@
               <div class="form-group">
                 <%= f.label :内容 %>
                 <%= f.text_area :body, class: 'form-control review_body' %>
-              </div>
-              <div class="form-group">
-                <%= f.label :星評価（仮） %>
-                <%= f.text_area :star, class: 'form-control review_star' %>
               </div>
               <div class="form-group">
                 <%= f.submit '送信' %>

@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
 
-
-
+  namespace :admin do
+    get 'review/show'
+  end
+  namespace :admin do
+    get 'items/index'
+    get 'items/show'
+    get 'items/new'
+  end
   namespace :public do
     get 'items/index'
     get 'items/show'
@@ -12,6 +18,8 @@ Rails.application.routes.draw do
     get 'reviews/show'
     get 'reviews/edit'
   end
+
+
   # 顧客用
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
@@ -25,6 +33,7 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
+
 
 
   # 顧客用リソース
@@ -44,7 +53,15 @@ Rails.application.routes.draw do
       end
       resource :relationship, only: [:create, :destroy]
     end
-    
+  end
+
+  # 管理者用リソース
+  namespace :admin do
+    root to: "homes#top"
+    resources :items do
+      resources :reviews, only: [:show, :destroy]
+    end
+    resources :users, only: [:index, :show, :destroy]
   end
 
 end

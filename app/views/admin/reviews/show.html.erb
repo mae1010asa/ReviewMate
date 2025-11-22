@@ -1,0 +1,28 @@
+<div class='container py-5'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <div class='row'>
+        <div class="description-scroll col-6 px-3">  
+          <h3><strong><%= @review.title %></strong></h3>
+          <%= render "public/shared/star", review: @review %>
+          <p class="description-scroll p-3">
+            商品名：<%= link_to @item.title, item_path(@item) %><br>
+            投稿者：<%= link_to @review.user.name, user_path(@review) %><br>
+            投稿日時：<%= @review.created_at %><br>
+            最終更新日時：<%= @review.updated_at %>
+          </p>
+          <p class="description-scroll px-3">
+            <%= @review.body %>
+          </p>
+        </div>
+      </div>
+      <div class="p-3">
+        <%= link_to "削除する", admin_item_review_path(@item, @review), method: :delete, class: "btn btn-danger", data: {confirm:"Are you sure?"} %>
+      </div>
+      <div class="p-3">
+        <h4></h4>
+      </div>
+    </div>
+  </div>
+</div>
+

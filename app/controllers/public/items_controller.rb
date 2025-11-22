@@ -1,5 +1,6 @@
 class Public::ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
+  skip_before_action :authenticate_user!, if: :admin_signed_in?
 
   def index
     @items = Item.includes(:reviews).all

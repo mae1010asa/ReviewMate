@@ -1,0 +1,39 @@
+<div class='container py-5'>
+  <div class='row'>
+    <div class='col-9 mx-auto'>
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-4">
+          <h4>アイテム</h4>
+        </div>
+        <div class="col-md-8 text-right">
+          <%= link_to "新規登録", new_item_path, class: 'btn btn-primary'%>
+        </div>
+      </div>
+
+      <table class="table table-hover">
+        <thead> <tr>
+            <th style="width: 10%;">アイテムID</th>
+            <th style="width: 20%;">アイテム画像</th>
+            <th style="width: 20%;">名称</th>
+            <th style="width: 20%;">レビュー数</th>
+            <th style="width: 20%;"></th>
+            <th style="width: 10%;"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td><%= item.id %></td>
+              <td><%= image_tag item.get_item_image, size:'100x65' %></td>
+              <td><%= item.title %></td>
+              <td><%= item.reviews.count %></td>
+              <td><%= link_to "詳細", item_path(item.id), class: "btn btn-primary" %></td>
+              <td><%= link_to "編集", edit_admin_item_path(item.id), class: "btn btn-success" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class='container py-2'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <div class='row'>
+        管理者トップページです。
+      </div>
+
+      <h4 class='my-5'>レビュー一覧</h4>
+      <table class='table table-hover my-5'>
+        <tbody>
+          <% @reviews.each do |review| %>
+            <tr>
+              <td>
+                <div class="px-3 py-2">
+                  <h5>
+                    <%= link_to review.title, admin_item_review_path(review.item, review) %><br>
+                    商品：<%= review.item.title %>
+                  </h5>
+                  <small class="text-muted">
+                    投稿日時：<%= review.created_at.strftime('%Y/%m/%d %H:%M') %>
+                  </small>
+                  <p class="mt-2 mb-0">
+                    内容：<%= review.body %>
+                  </p>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

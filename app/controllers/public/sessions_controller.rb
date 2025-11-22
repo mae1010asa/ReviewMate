@@ -24,6 +24,17 @@ class Public::SessionsController < Devise::SessionsController
     redirect_to mypage_path, notice: "ゲストユーザーとしてログインしました。"
   end
 
+  def after_sign_in_path_for(resource)
+    mypage_path(resource)
+  end
+
+  
+
+  def after_sign_out_path_for(resource)
+    homes_about_path
+  end
+
+
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.

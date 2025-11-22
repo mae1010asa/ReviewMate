@@ -7,7 +7,7 @@
           <%= render "public/shared/star", review: @review %>
           <p class="description-scroll p-3">
             商品名：<%= link_to @item.title, item_path(@item) %><br>
-            投稿者：<%= link_to @review.user.name, user_path(@review) %><br>
+            投稿者：<%= link_to @review.user.name, admin_user_path(@review) %><br>
             投稿日時：<%= @review.created_at %><br>
             最終更新日時：<%= @review.updated_at %>
           </p>

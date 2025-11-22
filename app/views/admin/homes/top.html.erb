@@ -14,8 +14,9 @@
                 <div class="px-3 py-2">
                   <h5>
                     <%= link_to review.title, admin_item_review_path(review.item, review) %><br>
-                    商品：<%= review.item.title %>
+                    <%= render "public/shared/star", review: review %>
                   </h5>
+                  <strong><%= review.item.title %></strong><br>
                   <small class="text-muted">
                     投稿日時：<%= review.created_at.strftime('%Y/%m/%d %H:%M') %>
                   </small>

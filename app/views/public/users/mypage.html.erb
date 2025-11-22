@@ -7,18 +7,23 @@
       <%= image_tag @user.get_user_image, size:'100x100' %>
 
       <h4 class='my-5'>投稿したレビュー</h4>
-      <table class='table my-5'>
+      <table class='table table-hover my-5'>
         <tbody>
           <% @user.reviews.each do |review| %>
-            <div class="px-3">
-                <h5>
-                  <%= link_to review.title, item_review_path(@user, review) %><br>
-                  商品：<%= review.item.title %>
-                </h5>
-                <div class="row px-3">
-                  内容：<p><%= review.body %></p>
+            <tr>
+              <td>
+                <div class="px-3 py-2">
+                  <h5>
+                    <%= link_to review.title, item_review_path(@user, review) %><br>
+                    <%= render "public/shared/star", review: review %>
+                  </h5>
+                  <strong><%= review.item.title %></strong><br>
+                  <p class="mt-2 mb-0">
+                    内容：<%= review.body %>
+                  </p>
                 </div>
-            </div>
+              </td>
+            </tr>
           <% end %>
         </tbody>
       </table>

@@ -22,6 +22,10 @@ class Public::ReviewsController < ApplicationController
   end
 
   def index
+    # 検索キー: tags_name_cont (タグ名を含む)
+    @q = Review.ransack(params[:q])
+    
+    @reviews = @q.result(distinct: true).includes(:item, :user).order(created_at: :desc)
   end
 
   def show
@@ -62,7 +66,7 @@ end
 private
 
   def review_params
-    params.require(:review).permit(:title, :body, :star)
+    params.require(:review).permit(:title, :body, :star, :tag_list)
   end
 
   # :item_id から @item を見つける

@@ -25,6 +25,11 @@ class User < ApplicationRecord
 
   has_one_attached :user_image
 
+  # Ransackの設定：検索可能な属性を定義
+  def self.ransackable_attributes(auth_object = nil)
+    ["name", "created_at"] 
+  end
+
   def self.guest
     find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
       user.password = SecureRandom.urlsafe_base64

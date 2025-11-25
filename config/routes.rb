@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     resources :items, only: [:new, :create, :index, :show] do
       resources :reviews, only: [:new, :create, :show, :edit, :update, :destroy]
     end
-    resources :users, only: [:show,:edit,:update, :destroy] do
+    resources :users, only: [:index, :show, :edit, :update, :destroy] do
       member do
         get :followings
         get :followers

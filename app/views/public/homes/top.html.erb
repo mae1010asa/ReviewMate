@@ -2,7 +2,18 @@
   <div class="row">
     <div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-6'>
       <h1><strong>ReviewMate</strong>  へようこそ!</h1>
-      <h5><%= link_to '※ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %></h5>
+      <% unless user_signed_in? %>
+        <h5><%= link_to '※ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %></h5>
+      <% end %>
+      <div class="search-form mt-4 p-3 bg-light rounded">
+        <h5>タグからレビューを検索</h5>
+        <%= search_form_for @q, url: public_reviews_index_path, class: "input-group" do |f| %>
+          <%= f.search_field :reviews_tags_name_cont, class: "form-control", placeholder: "タグ検索 (例: コスパ)" %>
+          <div class="input-group-append">
+            <%= f.submit "検索", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
       </div>
     </div>
   </div>

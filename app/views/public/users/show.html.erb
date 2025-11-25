@@ -28,6 +28,33 @@
             method: :post, class: "btn btn-primary" %>
         <% end %>
       </div>
+      <h4 class='my-5'>投稿したレビュー</h4>
+      <table class='table table-hover my-5'>
+        <tbody>
+          <% @user.reviews.each do |review| %>
+            <tr>
+              <td>
+                <div class="px-3 py-2">
+                  <h5>
+                    <%= link_to review.title, item_review_path(@user, review) %><br>
+                    <%= render "public/shared/star", review: review %>
+                  </h5>
+                  <strong><%= review.item.title %></strong><br>
+                  <div class="mb-2">
+                    <i class="fas fa-tags text-primary"></i>
+                    <% review.tag_list.each do |tag| %>
+                      <span class="badge badge-info"><%= tag %></span>
+                    <% end %>
+                  </div>
+                  <p class="mt-2 mb-0">
+                    内容：<%= review.body %>
+                  </p>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

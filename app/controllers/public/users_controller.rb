@@ -2,9 +2,16 @@ class Public::UsersController < ApplicationController
   before_action :authenticate_user!, only: [:mypage,:edit,:update, :destroy]
   before_action :ensure_not_guest_user, only: [:update, :destroy]
 
+  def index
+    # Ransackによる検索実行
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true)
+  end
+
   def mypage
     @user = current_user
     @reviews = @user.reviews
+    @q = User.ransack(params[:q])
   end
 
   def show

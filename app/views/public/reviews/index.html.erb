@@ -1,2 +1,57 @@
-<h1>Public::Reviews#index</h1>
-<p>Find me in app/views/public/reviews/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      
+      <h2 class="my-4">
+        <% if params[:q] && params[:q][:tags_name_cont].present? %>
+          "<%= params[:q][:tags_name_cont] %>" のタグがついたレビュー
+        <% else %>
+          レビュー一覧
+        <% end %>
+      </h2>
+
+      <table class='table table-hover my-5'>
+        <tbody>
+          <% @reviews.each do |review| %>
+            <tr>
+              <td>
+                <div class="px-3 py-2">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h5>
+                      <%= link_to review.title.presence || "タイトルなし", item_review_path(review.item, review), class: "text-dark font-weight-bold" %>
+                    </h5>
+                    <small>by <%= review.user.name %></small>
+                  </div>
+
+                  <div class="mb-2">
+                    <%= render "public/shared/star", review: review %>
+                  </div>
+
+                  <div class="mb-2">
+                    商品: <strong><%= review.item.name rescue review.item.title %></strong>
+                  </div>
+                  <div class="mb-2">
+                    <i class="fas fa-tags text-primary"></i>
+                    <% review.tag_list.each do |tag| %>
+                      <span class="badge badge-info"><%= tag %></span>
+                    <% end %>
+                  </div>
+                  <p class="mt-2 mb-0">
+                    内容：<%= review.body rescue review.content %>
+                  </p>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%# 検索結果が0件の場合のメッセージ %>
+      <% if @reviews.blank? %>
+        <div class="alert alert-warning">
+          該当するレビューは見つかりませんでした。
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

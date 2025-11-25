@@ -1,30 +1,80 @@
 <div class='container py-5'>
-  <div class='row'>
-    <div class='col-md-12'>
-      <div class='row'>
-        <div class="description-scroll col-6 px-3">  
-          <h3><strong><%= @review.title %></strong></h3>
-          <%= render "public/shared/star", review: @review %>
-          <p class="description-scroll p-3">
-            商品名：<%= link_to @item.title, item_path(@item) %><br>
-            投稿者：<%= link_to @review.user.name, user_path(@review) %><br>
-            投稿日時：<%= @review.created_at %><br>
-            最終更新日時：<%= @review.updated_at %>
-          </p>
-          <p class="description-scroll px-3">
-            <%= @review.body %>
-          </p>
+  <div class='row justify-content-center'>
+    <div class='col-md-10 col-lg-8'>
+      <div class="card shadow-sm mb-5">
+        <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+          <h3 class="card-title mb-0 font-weight-bold"><%= @review.title %></h3>
+          <% if @review.user == current_user %>
+            <div>
+              <%= link_to edit_item_review_path(@item, @review), class: "btn btn-sm btn-outline-success mr-1" do %>
+                <i class="fas fa-edit"></i> 編集
+              <% end %>
+              <%= link_to item_review_path(@item, @review), method: :delete, class: "btn btn-sm btn-outline-danger", data: {confirm: "本当に削除しますか？"} do %>
+                <i class="fas fa-trash-alt"></i> 削除
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <%= render "public/shared/star", review: @review %>
+          </div>
+          <div class="review-content mb-4">
+            <p class="lead" style="white-space: pre-wrap;"><%= @review.body %></p>
+          </div>
+          <div class="border-top pt-3">
+            <div class="row text-muted small">
+              <div class="col-sm-6">
+                <i class="fas fa-box-open"></i> 商品：<%= link_to @item.title, item_path(@item), class: "font-weight-bold" %><br>
+                <i class="fas fa-user"></i> 投稿者：<%= link_to @review.user.name, user_path(@review.user) %>
+              </div>
+              <div class="col-sm-6 text-md-right mt-2 mt-md-0">
+                投稿：<%= @review.created_at.strftime('%Y/%m/%d %H:%M') %><br>
+                更新：<%= @review.updated_at.strftime('%Y/%m/%d %H:%M') %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="p-3">
-        <% if @review.user == current_user %>
-        <%= link_to "編集する", edit_item_review_path(@item, @review), class: "btn btn-success" %>
-        <%= link_to "削除する", item_review_path(@item, @review), method: :delete, class: "btn btn-danger", data: {confirm:"Are you sure?"} %>
+
+      <div class="comments-section mb-5">
+        <h5 class="mb-3 border-bottom pb-2">
+          <i class="far fa-comments"></i> コメント 
+          <span class="badge badge-primary"><%= @review.comments.count %>件</span>
+        </h5>
+        <% @review.comments.each do |comment| %>
+          <div class="media p-3 mb-3 bg-light rounded">
+            <div class="media-body">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <h6 class="mt-0 font-weight-bold">
+                  <%= link_to comment.user.name, user_path(comment.user) %>
+                </h6>
+                <small class="text-muted"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></small>
+              </div>
+              <div class="comment-text">
+                <%= simple_format(comment.body) %>
+              </div>
+            </div>
+          </div>
         <% end %>
       </div>
-      <div class="p-3">
-        <h4></h4>
+
+      <div class="comment-form-section">
+        <div class="card bg-light border-0">
+          <div class="card-body">
+            <h6 class="card-title mb-3">コメントを投稿する</h6>
+            <%= form_with(model: [@item, @review, @comment], local: true) do |f| %>
+              <div class="form-group">
+                <%= f.text_area :body, class: 'form-control', rows: 4 %>
+              </div>
+              <div class="text-right">
+                <%= f.submit '送信する', class: "btn btn-primary px-4" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>

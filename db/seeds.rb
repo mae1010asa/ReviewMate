@@ -7,6 +7,8 @@
 #   Character.create(title: 'Luke', movie: movies.first)
 Admin.create!(email: 'admin@example.com', password: '123456')
 
+User.create!()
+
 Item.create!(
   [
    {title: "緑茶", body: "" },

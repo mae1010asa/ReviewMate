@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :reviews, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   # フォローしている側の関係
   has_many :active_relationships, class_name: "Relationship",

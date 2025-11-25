@@ -1,38 +1,70 @@
 <div class='container py-5'>
-  <div class='row'>
-      <div class='col-md-12'>
-        <div class='row'>
-          <div class="description-scroll col-6 px-3">  
-            <h2><%= @item.title %></h2>
-            <%= image_tag @item.get_item_image, size:'200x130' %>
-            <p class="description-scroll p-3">
-              <%= @item.body %>
-            </p>
+  <div class='row justify-content-center'>
+    <div class='col-md-10 col-lg-8'>
+      <div class="card shadow-sm mb-5">
+        <div class="row no-gutters">
+          <div class="col-md-4 d-flex align-items-center justify-content-center bg-light">
+            <div>
+              <%= image_tag @item.get_item_image, class: "img-fluid rounded", style: "max-height: 250px; object-fit: contain;" %>
+            </div>
           </div>
-        </div>
-        <div class="p-3">
-          <h4>
-            <%= link_to "レビュー投稿画面へ", new_item_review_path(@item) %>
-          </h4>
-        </div>
-        <div class="p-3">
-          <h4>【レビュー一覧】</h4>
-        </div>
-        <table class='my-5'>
-          <% @item.reviews.each do |review| %>
-            <div class="px-3">
-              <h5>
-                <%= link_to review.title, item_review_path(@item, review) %><br>
-                <%= render "public/shared/star", review: review %>
-                投稿者：<%= link_to review.user.name, user_path(@item, review) %>
-              </h5>
-              <div class="row px-3">
-                <%= image_tag review.user.get_user_image, size:'100x100' %>
-                <p class="px-3"><%= review.body %></p>
+          
+          <div class="col-md-8">
+            <div class="card-body h-100 d-flex flex-column">
+              <h2 class="card-title font-weight-bold"><%= @item.title %></h2>
+              <div class="card-text mb-4 flex-grow-1">
+                <%= simple_format(@item.body, class: "text-muted") %>
+              </div>
+              
+              <div class="text-right">
+                 <%= link_to "レビューを投稿", new_item_review_path(@item), class: "btn btn-primary px-4 shadow-sm" %>
               </div>
             </div>
-          <% end %>
-        </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="reviews-section">
+        <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+          <h4 class="mb-0">
+            <i class="fas fa-list-ul"></i> レビュー
+            <span class="badge badge-primary ml-2"><%= @item.reviews.count %>件</span>
+          </h4>
+        </div>
+
+        <% @item.reviews.each do |review| %>
+          <div class="card mb-3 shadow-sm hover-card">
+            <div class="card-body">
+              <% @item.reviews.each do |review| %>
+                <div class="px-3 py-2">
+                  <div class="d-flex justify-content-between">
+                    <h5>
+                      <%= link_to review.title, item_review_path(@item, review) %><br>
+                      <%= render "public/shared/star", review: review %>
+                    </h5>
+                    <small class="text-muted"><%= review.created_at.strftime('%Y/%m/%d') %></small>
+                  </div>
+                  <strong><i class="fas fa-user text-primary"></i><%= link_to review.user.name, user_path(review.user) %></strong><br>
+                  <div class="mb-2">
+                    <i class="fas fa-tags text-primary"></i>
+                    <% review.tag_list.each do |tag| %>
+                      <span class="badge badge-info"><%= tag %></span>
+                    <% end %>
+                  </div>
+                  <p class="card-text text-secondary mb-0">
+                    <%= truncate(review.body, length: 100) %>
+                  </p>
+                  <% if review.body.length > 100 %>
+                    <div class="text-right mt-1">
+                      <%= link_to "詳細を見る", item_review_path(@item, review), class: "small" %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
+</div>

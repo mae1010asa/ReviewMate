@@ -18,7 +18,7 @@
                 <div class="px-3 py-2">
                   <div class="d-flex justify-content-between align-items-center">
                     <h5>
-                      <%= link_to review.title.presence || "タイトルなし", item_review_path(review.item, review), class: "text-dark font-weight-bold" %>
+                      <%= link_to review.title.presence || "タイトルなし", item_review_path(review.item, review), class: "font-weight-bold" %>
                     </h5>
                     <small>by <%= review.user.name %></small>
                   </div>

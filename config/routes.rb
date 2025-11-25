@@ -44,7 +44,9 @@ Rails.application.routes.draw do
     get 'mypage', to: 'users#mypage', as: 'mypage'
 
     resources :items, only: [:new, :create, :index, :show] do
-      resources :reviews, only: [:new, :create, :show, :edit, :update, :destroy]
+      resources :reviews, only: [:new, :create, :show, :edit, :update, :destroy] do
+        resources :comments, only: [:create, :destroy]
+      end
     end
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
       member do

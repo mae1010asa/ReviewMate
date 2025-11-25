@@ -23,6 +23,10 @@
                   <%= f.text_area :body, class: 'form-control review_body' %>
                 </div>
                 <div class="form-group">
+                  <%= f.label :tag_list, "タグ (カンマ区切りで入力)" %>
+                  <%= f.text_field :tag_list, value: @review.tag_list.join(','), class: "form-control", placeholder: "例: コスパ良し, 初心者向け" %>
+                </div>
+                <div class="form-group">
                   <%= f.submit '送信', class: "btn btn-primary px-4" %>
                 </div>
               <% end %>

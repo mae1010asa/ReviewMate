@@ -10,16 +10,45 @@
           
           <h5 class="p-3"><%= link_to @user.followings.count, followings_user_path(@user) %> フォロー</h5>
           <h5 class="px-3"><%= link_to @user.followers.count, followers_user_path(@user) %> フォロワー</h5>
-          <% if @user == current_user %>
-            <p class="description-scroll p-3">
-              メールアドレス：<%= @user.email %>
-            </p>
-          <% end %>
-        </div>
-        <div class="p-3">
+            <div class="p-3">
           <%= link_to "削除する", admin_user_path, method: :delete, class: "btn btn-danger", data: {confirm:"ユーザーを削除してもいいですか？"} %>
+          </div>
         </div>
       </div>
+      <div class="d-flex justify-content-between align-items-center my-4 border-bottom pb-2">
+        <h4 class="mb-0">
+          <i class="fas fa-list-ul"></i> 投稿したレビュー
+        </h4>
+      </div>
+      <div class="card mb-3 shadow-sm hover-card">
+        <div class="card-body">
+          <% @user.reviews.each do |review| %>
+            <div class="px-3 py-2">
+              <div class="d-flex justify-content-between">
+                <h5>
+                  <%= link_to review.title, item_review_path(@user, review) %><br>
+                  <%= render "public/shared/star", review: review %>
+                </h5>
+                <small class="text-muted"><%= review.created_at.strftime('%Y/%m/%d') %></small>
+              </div>
+              <strong><i class="fa-box-open text-primary"></i><%= review.item.title %></strong><br>
+              <div class="mb-2">
+                <i class="fas fa-tags text-primary"></i>
+                <% review.tag_list.each do |tag| %>
+                  <span class="badge badge-info"><%= tag %></span>
+                <% end %>
+              </div>
+              <p class="card-text text-secondary mb-0">
+                <%= truncate(review.body, length: 100) %>
+              </p>
+              <% if review.body.length > 100 %>
+                <div class="text-right mt-1">
+                  <%= link_to "詳細を見る", item_review_path(@item, review), class: "small" %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

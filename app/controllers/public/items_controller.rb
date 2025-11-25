@@ -3,17 +3,25 @@ class Public::ItemsController < ApplicationController
   skip_before_action :authenticate_user!, if: :admin_signed_in?
 
   def index
-    @items = Item.includes(:reviews).all
     @q = Item.ransack(params[:q])
-
-    if params[:q].present?
-      # 検索がある場合
-      @items = @q.result(distinct: true).order(created_at: :desc)
-    else
-      # 検索がない場合（通常の一覧）
-      @items = Item.all.order(created_at: :desc)
-    end
-
+  # 検索結果を取得
+  items_results = @q.result(distinct: true)
+  # ソート機能の分岐
+  if params[:sort] == 'count'
+    # レビュー件数の多い順
+    @items = items_results.left_joins(:reviews)
+                          .group(:id)
+                          .order('COUNT(reviews.id) DESC')
+  elsif params[:sort] == 'rating'
+    # 評価の高い順
+    # left_joinsを使うことで、レビューがない商品も表示リストから消えない
+    @items = items_results.left_joins(:reviews)
+                          .group(:id)
+                          .order('AVG(reviews.star) DESC')
+  else params[:sort] == 'latest'
+    # 最新順
+    @items = items_results.order(created_at: :desc)
+  end
   end
 
   def show

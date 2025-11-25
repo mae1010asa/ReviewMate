@@ -35,32 +35,30 @@
         <% @item.reviews.each do |review| %>
           <div class="card mb-3 shadow-sm hover-card">
             <div class="card-body">
-              <% @item.reviews.each do |review| %>
-                <div class="px-3 py-2">
-                  <div class="d-flex justify-content-between">
-                    <h5>
-                      <%= link_to review.title, item_review_path(@item, review) %><br>
-                      <%= render "public/shared/star", review: review %>
-                    </h5>
-                    <small class="text-muted"><%= review.created_at.strftime('%Y/%m/%d') %></small>
-                  </div>
-                  <strong><i class="fas fa-user text-primary"></i><%= link_to review.user.name, user_path(review.user) %></strong><br>
-                  <div class="mb-2">
-                    <i class="fas fa-tags text-primary"></i>
-                    <% review.tag_list.each do |tag| %>
-                      <span class="badge badge-info"><%= tag %></span>
-                    <% end %>
-                  </div>
-                  <p class="card-text text-secondary mb-0">
-                    <%= truncate(review.body, length: 100) %>
-                  </p>
-                  <% if review.body.length > 100 %>
-                    <div class="text-right mt-1">
-                      <%= link_to "詳細を見る", item_review_path(@item, review), class: "small" %>
-                    </div>
+              <div class="px-3 py-2">
+                <div class="d-flex justify-content-between">
+                  <h5>
+                    <%= link_to review.title, item_review_path(@item, review) %><br>
+                    <%= render "public/shared/star", review: review %>
+                  </h5>
+                  <small class="text-muted"><%= review.created_at.strftime('%Y/%m/%d') %></small>
+                </div>
+                <strong><i class="fas fa-user text-primary"></i><%= link_to review.user.name, user_path(review.user) %></strong><br>
+                <div class="mb-2">
+                  <i class="fas fa-tags text-primary"></i>
+                  <% review.tag_list.each do |tag| %>
+                    <span class="badge badge-info"><%= tag %></span>
                   <% end %>
                 </div>
-              <% end %>
+                <p class="card-text text-secondary mb-0">
+                  <%= truncate(review.body, length: 100) %>
+                </p>
+                <% if review.body.length > 100 %>
+                  <div class="text-right mt-1">
+                    <%= link_to "詳細を見る", item_review_path(@item, review), class: "small" %>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
         <% end %>

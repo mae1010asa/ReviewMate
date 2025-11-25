@@ -10,7 +10,10 @@ class Public::UsersController < ApplicationController
 
   def mypage
     @user = current_user
-    @reviews = @user.reviews
+    following_user_ids = current_user.following_ids
+    @reviews = Review.where(user_id: following_user_ids)
+                     .includes(:user, :item)
+                     .order(created_at: :desc)
     @q = User.ransack(params[:q])
   end
 

@@ -5,16 +5,20 @@
 #
 #   movies = Movie.create([{ title: 'Star Wars' }, { title: 'Lord of the Rings' }])
 #   Character.create(title: 'Luke', movie: movies.first)
-# データの初期化
+# データの初期化（重複防止のため既存データを削除）
 puts "データをリセット中..."
+
+# acts-as-taggable-on のテーブルをクリア
+# Gemのモデルクラス名を指定して削除します
+ActsAsTaggableOn::Tagging.destroy_all if defined?(ActsAsTaggableOn)
+ActsAsTaggableOn::Tag.destroy_all if defined?(ActsAsTaggableOn)
+
 Comment.destroy_all
 Relationship.destroy_all
 Review.destroy_all
 Item.destroy_all
 User.destroy_all
 Admin.destroy_all
-Tag.destroy_all
-Tagging.destroy_all
 
 # ----------------------------------------------------------------
 # 1. 管理者データの作成
@@ -26,7 +30,7 @@ Admin.create!(
 )
 
 # ----------------------------------------------------------------
-# 2. ユーザーデータの作成
+# 2. ユーザーデータの作成 (12名)
 # ----------------------------------------------------------------
 puts "ユーザーを作成中..."
 users = []
@@ -45,7 +49,7 @@ user_names.each_with_index do |name, i|
 end
 
 # ----------------------------------------------------------------
-# 3. 商品データの作成
+# 3. 商品データの作成 (商標を避けた具体的な名称に変更)
 # ----------------------------------------------------------------
 puts "商品を作成中..."
 items = Item.create!([
@@ -120,13 +124,16 @@ items.each do |item|
       item: item,
       title: review_titles.sample,
       body: review_bodies.sample,
-      star: rand(1..5).to_s 
+      star: rand(1..5).to_s # schemaに合わせてstring型で保存
     )
 
     # タグ付け (0〜2個)
-    tags = tag_candidates.sample(rand(0..2))
-    review.tag_list.add(tags)
-    review.save
+    # acts-as-taggable-onを使用している場合
+    if defined?(ActsAsTaggableOn)
+      tags = tag_candidates.sample(rand(0..2))
+      review.tag_list.add(tags)
+      review.save
+    end
 
     # このレビューに対するコメント (0〜2件)
     rand(0..2).times do

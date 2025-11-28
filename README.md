@@ -21,6 +21,7 @@
 - 商品購入前、気になる商品に対して信頼できるレビューが知りたい時
 
 ## 設計書
+<img width="800" height="586" alt="アプリケーション設計" src="https://github.com/user-attachments/assets/643a5a54-d72b-48aa-a720-d6c7e9825902" />
 
 ​
 ## 開発環境

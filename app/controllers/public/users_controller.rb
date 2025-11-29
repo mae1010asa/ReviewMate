@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:mypage,:edit,:update, :destroy]
+  before_action :authenticate_user!, only: [:mypage,:edit,:update, :destroy, :show]
   before_action :ensure_not_guest_user, only: [:update, :destroy]
 
 

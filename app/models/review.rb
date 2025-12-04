@@ -2,8 +2,8 @@ class Review < ApplicationRecord
   has_many :comments, dependent: :destroy
   belongs_to :user
   belongs_to :item
-  validates :title,presence:true
-  validates :body,presence:true
+  validates :title, length: { maximum: 20 },presence:true
+  validates :body, length: { maximum: 99 },presence:true
   validates :star,presence:true
 
   # タグ機能の有効化

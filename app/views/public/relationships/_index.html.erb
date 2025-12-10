@@ -1,17 +1,8 @@
 <div class='container py-2'>
   <div class='row justify-content-center'>
     <div class='col-md-10 col-lg-8'>
-      <h2><%= user.name %><%= title %></h2>
+      <h2 class='py-3'><%= @this_user.name %><%= title %></h2>
       <table class='table'>
-        <thead>
-          <tr>
-            <th></th>
-            <th>ユーザー名</th>
-            <th colspan="3"></th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
         <tbody>
           <% users.each do |user| %>
             <tr>

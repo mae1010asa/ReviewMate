@@ -1,11 +1,6 @@
-<div id="show_star-<%= review.id %>"></div>
-<script>
-    var elem = document.querySelector('#show_star-<%= review.id %>');
-    var opt = {
-        starOn: "<%= asset_path('star-on.png') %>",
-        starOff: "<%= asset_path('star-off.png') %>",
-        readOnly: true,
-        score: <%= review.star %>
-    };
-    raty(elem,opt);
-</script>
+<div id="show_star-<%= review.id %>" 
+     class="raty-show" 
+     data-star-on="<%= asset_path('star-on.png') %>" 
+     data-star-off="<%= asset_path('star-off.png') %>" 
+     data-score="<%= review.star %>">
+</div>

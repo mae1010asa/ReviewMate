@@ -27,16 +27,11 @@
               <%= f.label :内容 %>
               <%= f.text_area :body, class: 'form-control review_body' %>
             </div>
-            <div id="post_raty"></div>
-              <script>
-                let elem = document.querySelector('#post_raty');
-                let opt = {  
-                  starOn: "<%= asset_path('star-on.png') %>",
-                  starOff: "<%= asset_path('star-off.png') %>",
-                  scoreName: 'review[star]',
-                };
-                raty(elem,opt);
-              </script>
+            <div id="post_raty" 
+                data-star-on="<%= asset_path('star-on.png') %>" 
+                data-star-off="<%= asset_path('star-off.png') %>" 
+                data-score-name="review[star]">
+            </div>
             <div class="form-group">
               <%= f.label :tag_list, "タグ (カンマ区切りで入力)" %>
               <%= f.text_field :tag_list, value: @review.tag_list.join(','), class: "form-control", placeholder: "例: コスパ良し, 初心者向け" %>

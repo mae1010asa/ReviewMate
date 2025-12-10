@@ -1,1 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
+
+.raty-cancel, .raty-star-on, .raty-star-off, .raty-star-half {
+  width: 24px;   /* 星の幅 */
+  height: 24px;  /* 星の高さ */
+  display: inline-block;
+}

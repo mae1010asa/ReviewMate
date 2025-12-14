@@ -58,6 +58,21 @@
               <div class="comment-text">
                 <%= simple_format(comment.body) %>
               </div>
+              <% if user_signed_in? %>
+                <% if comment.favorites.exists?(user_id: current_user.id) %>
+                  <%= link_to comment_favorite_path(comment),
+                      method: :delete do %>
+                    ♥ <%= comment.favorites.size %> いいね
+                  <% end %>
+                <% else %>
+                  <%= link_to comment_favorite_path(comment),
+                      method: :post do %>
+                    ♡ <%= comment.favorites.size %> いいね
+                  <% end %>
+                <% end %>
+              <% else %>
+                ♡ <%= comment.favorites.size %> いいね
+              <% end %>
             </div>
           </div>
         <% end %>

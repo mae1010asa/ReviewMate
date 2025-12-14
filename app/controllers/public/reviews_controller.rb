@@ -30,6 +30,7 @@ class Public::ReviewsController < ApplicationController
 
   def show
     @comment = Comment.new
+    @comments = @review.comments.includes(:user, :favorites)
   end
 
   def edit

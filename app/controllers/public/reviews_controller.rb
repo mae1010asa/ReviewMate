@@ -30,7 +30,18 @@ class Public::ReviewsController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = @review.comments.includes(:user, :favorites)
+    # コメントのソート機能
+    if params[:sort_comments] == 'latest'
+      # 最新順
+      @comments = @review.comments.includes(:user, :favorites)
+                                  .order(created_at: :desc)
+    else
+      # デフォルト: いいね数順（いいね数が同じなら新しい順）
+      @comments = @review.comments.includes(:user, :favorites)
+                                  .left_joins(:favorites)
+                                  .group(:id)
+                                  .order('COUNT(favorites.id) DESC, comments.created_at DESC')
+    end
   end
 
   def edit

@@ -46,15 +46,17 @@
           <i class="far fa-comments"></i> コメント 
           <span class="badge badge-primary"><%= @review.comments.count %>件</span>
         </h5>
-        <div class="row"> #ソート部分
+        <div class="row">
           <div class="col-12 mb-3 d-flex justify-content-end">
             <div class="btn-group">
-              <%= link_to '新着順', items_path(params.permit(:q, :sort).merge(sort: 'latest')), class: "btn btn-outline-secondary #{'active' if params[:sort] == 'latest' || params[:sort].nil?}" %>
-              <%= link_to 'いいねが多い順', items_path(params.permit(:q, :sort).merge(sort: 'count')), class: "btn btn-outline-secondary #{'active' if params[:sort] == 'count'}" %>
+              <%= link_to "人気順", item_review_path(@item, @review, sort_comments: 'likes', anchor: 'comments-section'),
+               class: "btn btn-outline-secondary #{'active' unless params[:sort_comments] == 'latest'}" %>
+              <%= link_to "新着順", item_review_path(@item, @review, sort_comments: 'latest', anchor: 'comments-section'),
+               class: "btn btn-outline-secondary #{'active' if params[:sort_comments] == 'latest'}" %>
             </div>
           </div>
         </div>
-        <% @review.comments.each do |comment| %>
+        <% @comments.each do |comment| %>
           <div class="media p-3 mb-3 bg-light rounded">
             <div class="media-body">
               <div class="d-flex justify-content-between align-items-center mb-1">

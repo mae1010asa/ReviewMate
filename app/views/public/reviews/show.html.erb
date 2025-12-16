@@ -46,6 +46,14 @@
           <i class="far fa-comments"></i> コメント 
           <span class="badge badge-primary"><%= @review.comments.count %>件</span>
         </h5>
+        <div class="row"> #ソート部分
+          <div class="col-12 mb-3 d-flex justify-content-end">
+            <div class="btn-group">
+              <%= link_to '新着順', items_path(params.permit(:q, :sort).merge(sort: 'latest')), class: "btn btn-outline-secondary #{'active' if params[:sort] == 'latest' || params[:sort].nil?}" %>
+              <%= link_to 'いいねが多い順', items_path(params.permit(:q, :sort).merge(sort: 'count')), class: "btn btn-outline-secondary #{'active' if params[:sort] == 'count'}" %>
+            </div>
+          </div>
+        </div>
         <% @review.comments.each do |comment| %>
           <div class="media p-3 mb-3 bg-light rounded">
             <div class="media-body">

@@ -11,12 +11,12 @@ class Review < ApplicationRecord
 
   # Ransackの設定：検索可能な属性
   def self.ransackable_attributes(auth_object = nil)
-    ["title", "created_at"] 
+    ["title", "body", "star", "created_at", "updated_at"]
   end
 
   # Ransackの設定：検索可能な関連（タグへのアクセスを許可）
   def self.ransackable_associations(auth_object = nil)
-    ["tags"]
+    ["tags", "item", "user"]
   end
 
 end

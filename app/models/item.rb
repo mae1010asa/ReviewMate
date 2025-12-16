@@ -22,13 +22,12 @@ class Item < ApplicationRecord
     end
   end
 
-  # Ransackの設定：ItemからReview、そしてReviewからTagへの検索を許可
-  def self.ransackable_associations(auth_object = nil)
-    ["reviews"]
+  def self.ransackable_attributes(auth_object = nil)
+    ["title", "body", "created_at", "updated_at"]
   end
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["body", "created_at", "id", "title", "updated_at"]
+  def self.ransackable_associations(auth_object = nil)
+    ["reviews"]
   end
 
 end

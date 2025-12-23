@@ -27,11 +27,13 @@ const initRaty = () => {
   
   if (formElem && formElem.children.length === 0) {
     console.log("★ フォーム要素を発見。Ratyを初期化します。");
-    
+
+    // Ratyのインスタンス作成
     const raty = new Raty(formElem, {
       starOn:    formElem.dataset.starOn,
       starOff:   formElem.dataset.starOff,
       scoreName: formElem.dataset.scoreName, 
+      score:     formElem.dataset.score,
       number:    5,
     });
     raty.init();

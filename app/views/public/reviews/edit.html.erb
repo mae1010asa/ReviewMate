@@ -12,8 +12,14 @@
         <div class="card bg-light border-0">
           <div class="comment-form px-3">
             <h4>レビュー内容を変更する</h4>
-            <%= render "public/shared/star", review: @review %>
+              
               <%= form_with(model: [@item, @review], local: true) do |f| %>
+                <div id="post_raty" 
+                  data-star-on="<%= asset_path('star-on.png') %>" 
+                  data-star-off="<%= asset_path('star-off.png') %>" 
+                  data-score-name="review[star]"
+                  data-score="<%= @review.star %>">
+                </div>
                 <div class="form-group">
                   <%= f.label :タイトル %>
                   <%= f.text_field :title, class: 'form-control review_title' %>

@@ -1,5 +1,5 @@
 class Public::ReviewsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:show, :edit, :new, :create, :update, :destroy]
   before_action :set_item, only: [:new, :create]
   before_action :set_review_and_item, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, if: :admin_signed_in?, only: [:show, :edit, :new]

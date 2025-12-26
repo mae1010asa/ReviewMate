@@ -14,7 +14,48 @@
           </div>
         <% end %>
       </div>
-      </div>
+    </div>
+    <div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-8 mt-3'>
+      <h4 class='mt-3'>最新のレビュー</h4>
+      <table class='table table-hover mt-3'>
+        <tbody>
+          <% @reviews.each do |review| %>
+            <tr>
+              <td>
+                <div class="d-flex position-relative">
+                  <%= image_tag review.item.get_item_image, style: "max-height: 200px; width: 150px; object-fit: cover;" %>
+                  <div class="px-3 py-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h5>
+                        <%= link_to review.title.presence || "タイトルなし", item_review_path(review.item, review), class: "font-weight-bold" %>
+                      </h5>
+                      
+                    </div>
+                    <div class="mb-2">
+                      <%= render "public/shared/star", review: review %>
+                    </div>
+                    <div class="mb-2">
+                      商品: <strong><%= review.item.name rescue review.item.title %></strong><br>
+                      <small>投稿者： <%= review.user.name %></small>
+                    </div>
+                    <div class="mb-2">
+                      <i class="fas fa-tags text-primary"></i>
+                      <% review.tag_list.each do |tag| %>
+                        <span class="badge badge-info"><%= tag %></span>
+                      <% end %>
+                    </div>
+                    <p class="text-truncate mt-2 mb-0">
+                      内容：<%= review.body rescue review.content %>
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
